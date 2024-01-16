@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfCustomer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Customer>
+    <accountNumber>1001</accountNumber>
+    <password>1231</password>
+    <name>Smith</name>
+    <balance>17324</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1002</accountNumber>
+    <password>1232</password>
+    <name>John</name>
+    <balance>5000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1004</accountNumber>
+    <password>1234</password>
+    <name>Ali</name>
+    <balance>2000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1006</accountNumber>
+    <password>1236</password>
+    <name>Aijaz</name>
+    <balance>20000</balance>
+  </Customer>
+</ArrayOfCustomer>

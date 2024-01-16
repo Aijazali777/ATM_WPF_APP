@@ -1,0 +1,15 @@
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\bin\Debug\ATM_WPF.exe.config
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\bin\Debug\ATM_WPF.exe
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\bin\Debug\ATM_WPF.pdb
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\MainWindow.g.cs
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\App.g.cs
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF_MarkupCompile.cache
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF_MarkupCompile.lref
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\MainWindow.baml
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.g.resources
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.Properties.Resources.resources
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.csproj.GenerateResource.cache
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.csproj.CoreCompileInputs.cache
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.exe
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.pdb
+C:\Users\aaijaz\source\repos\ATM_WPF\ATM_WPF\obj\Debug\ATM_WPF.csprojAssemblyReference.cache
