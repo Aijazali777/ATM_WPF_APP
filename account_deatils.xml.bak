@@ -4,13 +4,13 @@
     <accountNumber>1001</accountNumber>
     <password>1231</password>
     <name>Smith</name>
-    <balance>15324</balance>
+    <balance>14924</balance>
   </Customer>
   <Customer>
     <accountNumber>1002</accountNumber>
     <password>1232</password>
     <name>John</name>
-    <balance>46979</balance>
+    <balance>55979</balance>
   </Customer>
   <Customer>
     <accountNumber>1004</accountNumber>
@@ -31,69 +31,33 @@
     <balance>6000</balance>
   </Customer>
   <Customer>
-    <accountNumber>1009</accountNumber>
-    <password>1239</password>
-    <name>AA</name>
-    <balance>3000</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
-    <accountNumber />
-    <password />
-    <name />
-    <balance>0</balance>
-  </Customer>
-  <Customer>
     <accountNumber>1011</accountNumber>
     <password>1211</password>
     <name>Tom</name>
     <balance>4000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1009</accountNumber>
+    <password>1239</password>
+    <name>Test</name>
+    <balance>4999</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1010</accountNumber>
+    <password>1210</password>
+    <name>Ross</name>
+    <balance>60000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber />
+    <password />
+    <name />
+    <balance>0</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1</accountNumber>
+    <password>1</password>
+    <name>1</name>
+    <balance>1</balance>
   </Customer>
 </ArrayOfCustomer>

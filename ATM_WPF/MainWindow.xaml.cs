@@ -18,9 +18,6 @@ using System.Xml.Serialization;
 
 namespace ATM_WPF
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         string acctNum = "12345";
@@ -154,7 +151,28 @@ namespace ATM_WPF
             name = FldNewName.Text;
             if (double.TryParse(FldNewBalance.Text, out double amount_d))
                 amount = amount_d;
-            bool isExist = false;
+            bool isInvalid = false;
+
+            if(acctNum == "" || acctNum == null)
+            {
+                TxtSignupResponse.Text = "Please enter an account number to register.";
+                isInvalid = true;
+            }
+            else if (pass == "" || pass == null)
+            {
+                TxtSignupResponse.Text = "Please enter a password to register.";
+                isInvalid = true;
+            }
+            else if (name == "" || name == null)
+            {
+                TxtSignupResponse.Text = "Please enter your name to register.";
+                isInvalid = true;
+            }
+            else if (amount <= 500)
+            {
+                TxtSignupResponse.Text = "Please enter an amount of 500 or above to register.";
+                isInvalid = true;
+            }
 
             List<Customer> customer = deserilization();
             foreach (Customer cust in customer)
@@ -162,11 +180,11 @@ namespace ATM_WPF
                 if (acctNum == cust.accountNumber)
                 {
                     TxtSignupResponse.Text = "This account number already exists. Try another one.";
-                    isExist = true;
+                    isInvalid = true;
                 }
             }
 
-            if(!isExist)
+            if(!isInvalid)
             {
                 Customer newCustomer = new Customer();
                 newCustomer.accountNumber = acctNum;
@@ -284,17 +302,47 @@ namespace ATM_WPF
                     {
                         if(isBtnDepositClicked)
                         {
-                            arg.balance = arg.balance + amount;
-                            TxtMainOption.Text = "Amount Added Successfully!";
-                            TxtBalance.Text = "Your new Balance is " + arg.balance;
-                            isBtnDepositClicked = false;
+                            if(amount >= 500)
+                            {
+                                arg.balance = arg.balance + amount;
+                                TxtMainOption.Text = "Amount Added Successfully!";
+                                TxtBalance.Text = "Your new Balance is " + arg.balance;
+                                isBtnDepositClicked = false;
+                            }
+                            else
+                            {
+                                TxtMainOption.Text = "Please enter an amount of 500 or above to deposit";
+                                TxtBalance.Visibility = Visibility.Collapsed;
+                                SPDepositAndWithdraw.Visibility = Visibility.Visible;
+                            }
+                           
+                            
                         }
                         else if(isBtnWithDrawClicked)
                         {
-                            arg.balance = arg.balance - amount;
-                            TxtMainOption.Text = "Amount Withdrawn Successfully!";
-                            TxtBalance.Text = "Your new Balance is " + arg.balance;
-                            isBtnWithDrawClicked = false;
+                            if(amount < arg.balance)
+                            {
+                                if (amount >= 500)
+                                {
+                                    arg.balance = arg.balance - amount;
+                                    TxtMainOption.Text = "Amount withdrawn successfully!";
+                                    TxtBalance.Text = "Your new balance is " + arg.balance;
+                                    isBtnWithDrawClicked = false;
+                                }
+                                else
+                                {
+                                    TxtMainOption.Text = "Please enter an amount of 500 or above to Withdraw";
+                                    TxtBalance.Visibility = Visibility.Collapsed;
+                                    SPDepositAndWithdraw.Visibility = Visibility.Visible;
+                                }
+                            }
+                            else
+                            {
+                                TxtMainOption.Text = "You have insufficient balance. Please try another amount";
+                                TxtBalance.Visibility = Visibility.Collapsed;
+                                SPDepositAndWithdraw.Visibility = Visibility.Visible;
+                            }
+                            
                         }
                         else if (isBtnShowBalanceClicked)
                         {
