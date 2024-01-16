@@ -4,13 +4,13 @@
     <accountNumber>1001</accountNumber>
     <password>1231</password>
     <name>Smith</name>
-    <balance>17324</balance>
+    <balance>20324</balance>
   </Customer>
   <Customer>
     <accountNumber>1002</accountNumber>
     <password>1232</password>
     <name>John</name>
-    <balance>5000</balance>
+    <balance>64979</balance>
   </Customer>
   <Customer>
     <accountNumber>1004</accountNumber>
@@ -23,5 +23,29 @@
     <password>1236</password>
     <name>Aijaz</name>
     <balance>20000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1007</accountNumber>
+    <password>1236</password>
+    <name>Mathew</name>
+    <balance>6000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1011</accountNumber>
+    <password>1211</password>
+    <name>Tom</name>
+    <balance>4000</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1009</accountNumber>
+    <password>1239</password>
+    <name>Test</name>
+    <balance>4999</balance>
+  </Customer>
+  <Customer>
+    <accountNumber>1010</accountNumber>
+    <password>1210</password>
+    <name>Ross</name>
+    <balance>60000</balance>
   </Customer>
 </ArrayOfCustomer>

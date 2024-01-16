@@ -26,6 +26,8 @@ namespace ATM_WPF
         string acctNum = "12345";
         string pass = "";
         double amount = 0;
+        string name;
+        string currentUserName = "";
 
         bool isBtnDepositClicked = false;
         bool isBtnWithDrawClicked = false;
@@ -46,35 +48,31 @@ namespace ATM_WPF
             TxtMainOption.Text = "Please Select any option below to continue";
             BtnExistingUser.Content = "Existing User";
             BtnNewUser.Content = "New User";
-            TxtAccountNum.Visibility = Visibility.Collapsed;
-            FldAccountNum.Visibility = Visibility.Collapsed;
-            TxtPassword.Visibility = Visibility.Collapsed;
-            FldPassword.Visibility = Visibility.Collapsed;
-            BtnLogin.Visibility = Visibility.Collapsed;
-            TxtResponse.Visibility = Visibility.Collapsed;
-            SPOptionsAfterLogin.Visibility = Visibility.Collapsed;
-            FldAmount.Visibility = Visibility.Collapsed;
-            BtnDone.Visibility = Visibility.Collapsed;
-            BtnBack.Visibility = Visibility.Collapsed;
+
             TxtWelcome.Visibility = Visibility.Visible;
-            BtnExistingUser.Visibility = Visibility.Visible;
-            BtnNewUser.Visibility = Visibility.Visible;
+            TxtMainOption.Visibility = Visibility.Visible;
+            SPMainChoice.Visibility = Visibility.Visible;
+            SPLogin.Visibility = Visibility.Collapsed;
+            SPSignUp.Visibility = Visibility.Collapsed;
+            SPMenu.Visibility = Visibility.Collapsed;
+            SPDepositAndWithdraw.Visibility = Visibility.Collapsed;
+            TxtBalance.Visibility = Visibility.Collapsed;
+            BtnBack.Visibility = Visibility.Collapsed;
+            TxtSignupResponse.Visibility = Visibility.Collapsed;
         }
 
         private void ExistingUser(object sender, RoutedEventArgs e)
         {
-            BtnExistingUser.Visibility = Visibility.Collapsed;
-            BtnNewUser.Visibility = Visibility.Collapsed;
+            SPMainChoice.Visibility = Visibility.Collapsed;
+            SPSignUp.Visibility = Visibility.Collapsed;
+            SPLogin.Visibility = Visibility.Visible;
+
             TxtMainOption.Text = "Login";
             TxtAccountNum.Text = "Enter account number";
             TxtPassword.Text = "Enter password";
             BtnLogin.Content = "Login";
-            TxtAccountNum.Visibility = Visibility.Visible;
-            FldAccountNum.Visibility = Visibility.Visible;
-            TxtPassword.Visibility = Visibility.Visible;
-            FldPassword.Visibility = Visibility.Visible;
-            BtnLogin.Visibility = Visibility.Visible;
-            TxtResponse.Visibility = Visibility.Visible;
+            TxtResponse.Text = "";
+
 
             Binding b1 = new Binding("Text");
             b1.Source = FldAccountNum;
@@ -84,6 +82,39 @@ namespace ATM_WPF
             Binding b2 = new Binding("Text");
             b2.Source = FldPassword;
             FldPassword.SetBinding(TextBox.TextProperty, b2);
+
+        }
+
+        private void NewUser(object sender, RoutedEventArgs e)
+        {
+            SPMainChoice.Visibility = Visibility.Collapsed;
+            SPSignUp.Visibility = Visibility.Visible;
+
+            TxtMainOption.Text = "SignUp";
+            TxtNewAccountNum.Text = "Enter account number";
+            TxtNewPassword.Text = "Enter password";
+            TxtNewName.Text = "Enter name";
+            TxtNewBalance.Text = "Enter an amount";
+            BtnSignup.Content = "SignUp";
+            TxtSignupResponse.Text = "";
+
+            Binding b1 = new Binding("Text");
+            b1.Source = FldNewAccountNum;
+            FldNewAccountNum.SetBinding(TextBox.TextProperty, b1);
+
+
+            Binding b2 = new Binding("Text");
+            b2.Source = FldNewPassword;
+            FldNewPassword.SetBinding(TextBox.TextProperty, b2);
+
+            Binding b3 = new Binding("Text");
+            b3.Source = FldNewName;
+            FldNewName.SetBinding(TextBox.TextProperty, b3);
+
+
+            Binding b4 = new Binding("Text");
+            b4.Source = FldNewBalance;
+            FldNewBalance.SetBinding(TextBox.TextProperty, b4);
 
         }
 
@@ -113,12 +144,53 @@ namespace ATM_WPF
             return desCust;
         }
 
+        private void signup(object sender, RoutedEventArgs e)
+        {
+            TxtSignupResponse.Visibility = Visibility.Visible;
+            TxtMainOption.Visibility = Visibility.Visible;
+            TxtMainOption.Text = "SignUp";
+            acctNum = FldNewAccountNum.Text;
+            pass = FldNewPassword.Text;
+            name = FldNewName.Text;
+            if (double.TryParse(FldNewBalance.Text, out double amount_d))
+                amount = amount_d;
+            bool isExist = false;
+
+            List<Customer> customer = deserilization();
+            foreach (Customer cust in customer)
+            {
+                if (acctNum == cust.accountNumber)
+                {
+                    TxtSignupResponse.Text = "This account number already exists. Try another one.";
+                    isExist = true;
+                }
+            }
+
+            if(!isExist)
+            {
+                Customer newCustomer = new Customer();
+                newCustomer.accountNumber = acctNum;
+                newCustomer.password = pass;
+                newCustomer.name = name;
+                newCustomer.balance = amount;
+
+                customer.Add(newCustomer);
+                serilization(customer);
+
+                TxtSignupResponse.Text = "Account created successfully!";
+                ExistingUser(sender, e);
+            }
+            
+        }
+
         private void login(object sender, RoutedEventArgs e)
         {
+            TxtSignupResponse.Visibility = Visibility.Collapsed;
             acctNum = FldAccountNum.Text;
             pass = FldPassword.Text;
 
             bool isAccount = false;
+            bool isPassword = false;
             List<Customer> desCustomer = deserilization();
 
             foreach (Customer arg in desCustomer)
@@ -128,7 +200,7 @@ namespace ATM_WPF
                     isAccount = true;
                     if (pass == arg.password)
                     {
-                        TxtMainOption.Text = "Welcome " + arg.name;
+                        currentUserName = arg.name;
                         menu();
                     }
                 }
@@ -136,20 +208,21 @@ namespace ATM_WPF
 
             if (!isAccount)
             {
-                TxtResponse.Text = "Incorrect Password. Please Try Again.";
+                TxtResponse.Text = "Account Not Found";
             }
-            else
+            else if(!isPassword)
             {
-                TxtResponse.Text = "Logged In Succesfully!";
+                TxtResponse.Text = "Incorrect Password";
             }
         }
 
         private void deposit(object sender, RoutedEventArgs e)
         {
-            SPOptionsAfterLogin.Visibility = Visibility.Collapsed;
-            FldAmount.Visibility = Visibility.Visible;
+            SPMenu.Visibility = Visibility.Collapsed;
+            SPDepositAndWithdraw.Visibility = Visibility.Visible;
+            TxtBalance.Visibility = Visibility.Collapsed;
             BtnBack.Visibility = Visibility.Visible;
-            BtnDone.Visibility = Visibility.Visible;
+            TxtBalance.Text = "";
             BtnDone.Content = "Deposit";
             TxtMainOption.Text = "Please enter an amount to deposit!";
             Binding b1 = new Binding("Text");
@@ -160,10 +233,11 @@ namespace ATM_WPF
 
         private void withdraw(object sender, RoutedEventArgs e)
         {
-            SPOptionsAfterLogin.Visibility = Visibility.Collapsed;
-            FldAmount.Visibility = Visibility.Visible;
+            SPMenu.Visibility = Visibility.Collapsed;
+            SPDepositAndWithdraw.Visibility = Visibility.Visible;
+            TxtBalance.Visibility = Visibility.Collapsed;
             BtnBack.Visibility = Visibility.Visible;
-            BtnDone.Visibility = Visibility.Visible;
+            TxtBalance.Text = "";
             BtnDone.Content = "Withdraw";
             TxtMainOption.Text = "Please enter an amount to Withdraw!";
             Binding b1 = new Binding("Text");
@@ -174,24 +248,27 @@ namespace ATM_WPF
 
         private void showBalance(object sender, RoutedEventArgs e)
         {
-            SPOptionsAfterLogin.Visibility = Visibility.Collapsed;
+            SPMenu.Visibility = Visibility.Collapsed;
+            SPDepositAndWithdraw.Visibility = Visibility.Collapsed;
+            TxtBalance.Visibility = Visibility.Visible;
             BtnBack.Visibility = Visibility.Visible;
             isBtnShowBalanceClicked = true;
+            isBtnDepositClicked = false;
+            isBtnWithDrawClicked = false;
             done(sender,e);
         }
 
         private void Exit(object sender, RoutedEventArgs e)
         {
-            SPOptionsAfterLogin.Visibility = Visibility.Collapsed;
+            SPMenu.Visibility = Visibility.Collapsed;
             isBtnExitClicked = true;
             done(sender, e);
         }
 
         private void done(object sender, RoutedEventArgs e)
         {
-            TxtResponse.Visibility = Visibility.Visible;
-            FldAmount.Visibility = Visibility.Collapsed;
-            BtnDone.Visibility = Visibility.Collapsed;
+            SPDepositAndWithdraw.Visibility = Visibility.Collapsed;
+            TxtBalance.Visibility = Visibility.Visible;
             BtnBack.Visibility = Visibility.Visible;
 
             if (double.TryParse(FldAmount.Text, out double amount_d))
@@ -209,26 +286,28 @@ namespace ATM_WPF
                         {
                             arg.balance = arg.balance + amount;
                             TxtMainOption.Text = "Amount Added Successfully!";
-                            TxtResponse.Text = "Your new Balance is " + arg.balance;
+                            TxtBalance.Text = "Your new Balance is " + arg.balance;
                             isBtnDepositClicked = false;
                         }
                         else if(isBtnWithDrawClicked)
                         {
                             arg.balance = arg.balance - amount;
                             TxtMainOption.Text = "Amount Withdrawn Successfully!";
-                            TxtResponse.Text = "Your new Balance is " + arg.balance;
+                            TxtBalance.Text = "Your new Balance is " + arg.balance;
                             isBtnWithDrawClicked = false;
                         }
                         else if (isBtnShowBalanceClicked)
                         {
-                            arg.balance = arg.balance - amount;
                             TxtMainOption.Text = "";
-                            TxtResponse.Text = "Your available Balance is " + arg.balance;
+                            TxtBalance.Text = "Your available Balance is " + arg.balance;
                             isBtnShowBalanceClicked = false;
                         }
                         else if (isBtnExitClicked)
                         {
+                            SPDepositAndWithdraw.Visibility = Visibility.Collapsed;
+                            TxtBalance.Visibility = Visibility.Collapsed;
                             BtnBack.Visibility = Visibility.Collapsed;
+                            
                             isBtnExitClicked = false;
                             Welcome();
                         }
@@ -240,20 +319,19 @@ namespace ATM_WPF
 
         private void back(object sender, RoutedEventArgs e)
         {
-            TxtMainOption.Visibility = Visibility.Collapsed;
+            SPSignUp.Visibility = Visibility.Collapsed;
+            TxtMainOption.Text = "";
+            SPDepositAndWithdraw.Visibility = Visibility.Collapsed;
+            TxtBalance.Visibility = Visibility.Collapsed;
             BtnBack.Visibility = Visibility.Collapsed;
             menu();
         }
 
         void menu()
         {
-            TxtAccountNum.Visibility = Visibility.Collapsed;
-            FldAccountNum.Visibility = Visibility.Collapsed;
-            TxtPassword.Visibility = Visibility.Collapsed;
-            FldPassword.Visibility = Visibility.Collapsed;
-            BtnLogin.Visibility = Visibility.Collapsed;
-            TxtResponse.Visibility = Visibility.Collapsed;
-            SPOptionsAfterLogin.Visibility = Visibility.Visible;
+            SPLogin.Visibility = Visibility.Collapsed;
+            SPMenu.Visibility = Visibility.Visible;
+            TxtMainOption.Text = "Welcome "+currentUserName+" :) ";
             TxtOption.Text = "Please select any option to process...";
         }
     }

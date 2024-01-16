@@ -5,28 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ATM_WPF"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="550" Width="800">
     <Grid Background="Brown">
         <StackPanel>
             <TextBlock Name="TxtWelcome" Text="" TextAlignment="Center" FontSize="25" FontWeight="Bold" Margin="10"/>
+            <TextBlock Name="TxtSignupResponse" FontSize="15" Margin="10"  Width="500" FontWeight="Black" TextAlignment="Center"/>
             <TextBlock Name="TxtMainOption" FontSize="15" TextAlignment="Center" FontWeight="Black" Margin="10"/>
-            <Button Name="BtnExistingUser" FontSize="15"  Margin="5" Width="120" Click="ExistingUser"/>
-            <Button Name="BtnNewUser" FontSize="15" Margin="5" Width="120"/>
-            <TextBlock Name="TxtAccountNum" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
-            <TextBox Name="FldAccountNum" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=acctNum}"/>
-            <TextBlock Name="TxtPassword" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
-            <TextBox Name="FldPassword" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=pass}"/>
-            <Button Name="BtnLogin" FontSize="15" Margin="5" Width="120" Click="login"/>
-            <TextBlock Name="TxtResponse" FontSize="15" Margin="10"  Width="300" FontWeight="Black" TextAlignment="Center"/>
-            <StackPanel Name="SPOptionsAfterLogin" Orientation="Vertical">
+
+            <StackPanel Name="SPMainChoice" Orientation="Vertical">
+                <Button Name="BtnExistingUser" FontSize="15"  Margin="5" Width="120" Click="ExistingUser"/>
+                <Button Name="BtnNewUser" FontSize="15" Margin="5" Width="120" Click="NewUser"/>
+            </StackPanel>
+
+            <StackPanel Name="SPLogin" Orientation="Vertical">
+                <TextBlock Name="TxtAccountNum" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldAccountNum" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=acctNum}"/>
+                <TextBlock Name="TxtPassword" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldPassword" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=pass}"/>
+                <Button Name="BtnLogin" FontSize="15" Margin="5" Width="120" Click="login"/>
+                <TextBlock Name="TxtResponse" FontSize="15" Margin="10"  Width="300" FontWeight="Black" TextAlignment="Center"/>
+            </StackPanel>
+
+            <StackPanel Name="SPSignUp" Orientation="Vertical">
+                <TextBlock Name="TxtNewAccountNum" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldNewAccountNum" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=acctNum}"/>
+                <TextBlock Name="TxtNewPassword" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldNewPassword" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=pass}"/>
+                <TextBlock Name="TxtNewName" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldNewName" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=name}"/>
+                <TextBlock Name="TxtNewBalance" FontSize="15" Margin="5"  Width="180" FontWeight="Black"/>
+                <TextBox Name="FldNewBalance" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=amount}"/>
+                <Button Name="BtnSignup" FontSize="15" Margin="5" Width="120" Click="signup"/>
+            </StackPanel>
+
+            <StackPanel Name="SPMenu" Orientation="Vertical">
                 <TextBlock Name="TxtOption" FontSize="15" TextAlignment="Center" FontWeight="Black" Margin="10"/>
                 <Button Name="BtnDeposit" FontSize="15" Margin="5" Width="120" Content="Deposit" Click="deposit"/>
                 <Button Name="BtnWithdraw" FontSize="15" Margin="5" Width="120" Content="Withdraw" Click="withdraw"/>
                 <Button Name="BtnShowBalance" FontSize="15" Margin="5" Width="120" Content="Show Balance" Click="showBalance"/>
                 <Button Name="BtnExit" FontSize="15" Margin="5" Width="120" Content="Exit" Click="Exit"/>
             </StackPanel>
-            <TextBox Name="FldAmount" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=amount}"/>
-            <Button Name="BtnDone" FontSize="15" Margin="5" Width="120" Content="Deposit" Click="done"/>
+
+            <StackPanel  Name="SPDepositAndWithdraw" Orientation="Vertical">
+                <TextBox Name="FldAmount" FontSize="15" Margin="5"  Width="140" Text="{Binding Path=amount}"/>
+                <Button Name="BtnDone" FontSize="15" Margin="5" Width="120" Content="Deposit" Click="done"/>
+            </StackPanel>
+            <TextBlock Name="TxtBalance" FontSize="15" Margin="10"  Width="300" FontWeight="Black" TextAlignment="Center"/>
             <Button Name="BtnBack" FontSize="15" Margin="5" Width="120" Content="Back" Click="back"/>
         </StackPanel>
     </Grid>
